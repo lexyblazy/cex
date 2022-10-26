@@ -1,0 +1,5 @@
+FROM node:16
+
+ENV NODE_ENV=${NODE_ENV}
+
+WORKDIR /app
