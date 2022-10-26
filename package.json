@@ -9,7 +9,8 @@
     "start:dev": "yarn common:dev up",
     "stop:dev": "yarn common:dev down",
     "cleandeps": "rm -rf node_modules packages/*/node_modules",
-    "cleaninstall": "yarn cleandeps && yarn install && yarn bootstrap"
+    "initialize": "yarn install && yarn bootstrap",
+    "cleaninstall": "yarn cleandeps && yarn initialize"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
