@@ -4,10 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf build && yarn tsc",
+    "build": "rm -rf dist && yarn tsc",
     "main:dev": "./bin/ts-node.sh src/main.ts",
     "watch:dev": "yarn nodemon --config nodemon.json",
-    "start:prod": "yarn build && node build/main.js"
+    "start:prod": "yarn build && node dist/main.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.14",
