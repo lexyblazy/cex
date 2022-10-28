@@ -4,8 +4,8 @@ import { HdKeyUtils } from "../common";
 import * as constants from "./constants";
 
 export class EthereumHdKeyUtils extends HdKeyUtils {
+  private derivationPath: string;
   xpub: string;
-  derivationPath: string;
 
   constructor(mnemonic: string, password?: string) {
     super();

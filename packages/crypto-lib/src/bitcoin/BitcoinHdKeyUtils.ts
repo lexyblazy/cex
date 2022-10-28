@@ -5,7 +5,7 @@ import { AddressType } from "./types";
 
 export class BitcoinHdKeyUtils extends HdKeyUtils {
   xpub: string;
-  derivationPath: string;
+  private derivationPath: string;
   network?: bitcoinJS.networks.Network;
 
   constructor(
