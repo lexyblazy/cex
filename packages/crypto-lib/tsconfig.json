@@ -2,10 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "declaration": true,
-    "outDir": "./dist",
-    "paths": {
-      "#": ["./src/"]
-    }
+    "outDir": "./dist"
   },
   "include": ["src"]
 }
