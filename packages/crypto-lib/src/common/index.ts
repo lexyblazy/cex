@@ -1,1 +1,1 @@
-export * from "./HdKeyUtils";
+export * from "./HdWallet";

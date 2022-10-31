@@ -1,22 +1,27 @@
 import * as ethers from "ethers";
 
-import { HdKeyUtils } from "../common";
+import { HdWallet } from "../common";
 import * as constants from "./constants";
 
-export class EthereumHdKeyUtils extends HdKeyUtils {
+export class EthereumHdWallet extends HdWallet {
   private derivationPath: string;
-  xpub: string;
+  private xpub: string;
+  private xprv: string;
 
   constructor(mnemonic: string, password?: string) {
     super();
     this.derivationPath = constants.DEFAULT_DERIVATION_PATH;
     this.xpub = this.getXpub(mnemonic, this.derivationPath, password);
+    this.xprv = this.getXprv(mnemonic, this.derivationPath, password);
   }
 
   deriveAddress(index: number) {
-    const node = ethers.utils.HDNode.fromExtendedKey(this.xpub);
+    const publicKey = this.getPublicKey(this.xpub, index);
 
-    const { publicKey } = node.derivePath(index.toString());
     return ethers.utils.computeAddress(publicKey);
+  }
+
+  getSigningKey(index: number): string {
+    return this.getPrivateKey(this.xprv, index);
   }
 }

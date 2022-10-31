@@ -1,1 +1,1 @@
-export * from "./BitcoinHdKeyUtils";
+export * from "./BitcoinHdWallet";

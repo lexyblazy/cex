@@ -1,10 +1,11 @@
 import * as bitcoinJS from "bitcoinjs-lib";
-import { HdKeyUtils } from "../common";
+import { HdWallet } from "../common";
 import * as constants from "./constants";
 import { AddressType } from "./types";
 
-export class BitcoinHdKeyUtils extends HdKeyUtils {
-  xpub: string;
+export class BitcoinHdWallet extends HdWallet {
+  private xpub: string;
+  private xprv: string;
   private derivationPath: string;
   network?: bitcoinJS.networks.Network;
 
@@ -16,13 +17,16 @@ export class BitcoinHdKeyUtils extends HdKeyUtils {
     super();
     this.derivationPath = constants.DEFAULT_DERIVATION_PATH;
     this.xpub = this.getXpub(mnemonic, this.derivationPath, password);
+    this.xprv = this.getXprv(mnemonic, this.derivationPath, password);
+
     this.network = network ?? bitcoinJS.networks.bitcoin;
   }
 
   deriveAddress(index: number, type: AddressType = "legacy") {
-    const node = this.bip32.fromBase58(this.xpub, this.network);
+    const publicKey = this.getPublicKey(this.xpub, index);
+
     const params: bitcoinJS.payments.Payment = {
-      pubkey: node.derive(index).publicKey,
+      pubkey: publicKey,
       network: this.network,
     };
 
@@ -32,5 +36,9 @@ export class BitcoinHdKeyUtils extends HdKeyUtils {
       case "segwitNative":
         return bitcoinJS.payments.p2wpkh(params).address;
     }
+  }
+
+  getSigningKey(index: number): string {
+    return this.getPrivateKey(this.xprv, index);
   }
 }

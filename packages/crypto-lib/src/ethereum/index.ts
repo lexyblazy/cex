@@ -1,1 +1,1 @@
-export * from './EthereumHdKeyUtils'
+export * from './EthereumHdWallet'
