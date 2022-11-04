@@ -2,7 +2,7 @@ import * as ethers from "ethers";
 
 import { HdWalletUtils } from "../../common/HdWalletUtils";
 
-export class EthereumHdWallet extends HdWalletUtils {
+export class EthereumHdWalletUtils extends HdWalletUtils {
   private xpub: string;
   private xprv?: string;
 
