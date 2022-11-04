@@ -1,25 +1,18 @@
 import * as bitcoinJS from "bitcoinjs-lib";
-import { HdWallet } from "../common";
-import * as constants from "./constants";
+import { HdWalletUtils } from "../../common/HdWalletUtils";
 import { AddressType } from "./types";
 
-export class BitcoinHdWallet extends HdWallet {
+export class BitcoinHdWalletUtils extends HdWalletUtils {
   private xpub: string;
-  private xprv: string;
-  private derivationPath: string;
+  private xprv?: string;
   network?: bitcoinJS.networks.Network;
 
-  constructor(
-    mnemonic: string,
-    network?: bitcoinJS.networks.Network,
-    password?: string
-  ) {
+  constructor(xpub: string, xprv?: string) {
     super();
-    this.derivationPath = constants.DEFAULT_DERIVATION_PATH;
-    this.xpub = this.getXpub(mnemonic, this.derivationPath, password);
-    this.xprv = this.getXprv(mnemonic, this.derivationPath, password);
+    this.xpub = xpub;
+    this.xprv = xprv;
 
-    this.network = network ?? bitcoinJS.networks.bitcoin;
+    this.network = bitcoinJS.networks.bitcoin;
   }
 
   deriveAddress(index: number, type: AddressType = "legacy") {
@@ -39,6 +32,10 @@ export class BitcoinHdWallet extends HdWallet {
   }
 
   getSigningKey(index: number): string {
+    if (!this.xprv) {
+      throw new Error("xprv is required to retrieve signing key");
+    }
+
     return this.getPrivateKey(this.xprv, index);
   }
 }
