@@ -1,12 +1,25 @@
+import "reflect-metadata";
 import express from "express";
+import * as typeorm from "typeorm";
 
-const app = express();
+import { loadServices } from "./init";
+
 const { PORT } = process.env;
 
-app.get("/", (_req, res) => {
-  res.send("Hello there");
-});
+const main = async (app: express.Application) => {
+  await loadServices();
 
-app.listen(PORT, () => {
-  console.log(`Server is up and running on ${PORT} 🚀🚀`);
-});
+  app.get("/status", async (_req, res) => {
+    const connection = typeorm.getConnection();
+
+    res.send({
+      isDatabaseConnected: connection.isConnected,
+    });
+  });
+
+  app.listen(PORT, () => {
+    console.log(`Server is up and running on ${PORT} 🚀🚀`);
+  });
+};
+
+main(express()).catch(console.error);
