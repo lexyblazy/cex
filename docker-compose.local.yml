@@ -34,6 +34,20 @@ services:
       - redis
     env_file:
       - ./env/local.env
+  worker:
+    build:
+      context: ./packages/app
+      dockerfile: Dockerfile
+    image: cex-app:latest
+    container_name: "cex_worker"
+    command: 'bash -c "cd ./packages/app && npm run watch:worker"'
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - ./env/local.env
 
 volumes:
   redis_volume:

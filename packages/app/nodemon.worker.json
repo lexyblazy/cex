@@ -1,0 +1,8 @@
+{
+    "exec": "yarn worker:dev",
+    "ext": "ts",
+    "delay": 3,
+    "watch": ["src", "tsconfig.json", "yarn.lock"],
+    "ignore": ["*.test.ts", "*.spec.ts"]
+  }
+  
