@@ -27,6 +27,7 @@ services:
     command: 'bash -c "cd ./packages/app && npm run watch:dev"'
     volumes:
       - .:/app
+      - node_modules:/app/node_modules
     ports:
       - "${PORT}:${PORT}"
     depends_on:
@@ -52,3 +53,4 @@ services:
 volumes:
   redis_volume:
   db_volume:
+  node_modules:
