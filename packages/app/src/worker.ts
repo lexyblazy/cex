@@ -1,12 +1,19 @@
 // address worker
 // transaction worker
 // session worker - revalidate sessions
-
 import throng from "throng";
+import { initServices } from "./init";
 import { addressWorker } from "./workers";
 
 const main = async () => {
-  addressWorker.start();
+  await initServices();
+
+  return throng({
+    start: async () => {
+      return Promise.all([addressWorker.start()]);
+    },
+    workers: process.env.WORKERS_PROCESSES_COUNT,
+  });
 };
 
-throng({ start: main });
+main().catch(console.error);

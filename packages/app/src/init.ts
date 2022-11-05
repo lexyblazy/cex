@@ -1,8 +1,12 @@
 import * as typeorm from "typeorm";
+import { initRedis } from "./redisHelper";
+import { initWorkers } from "./workers";
 
-export const loadServices = async () => {
+export const initServices = async () => {
   try {
     await initTypeorm();
+    initRedis();
+    initWorkers();
   } catch (error) {
     console.error("Failed to init core requirements", error);
     process.exit(1);
