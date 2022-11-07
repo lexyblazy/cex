@@ -23,5 +23,11 @@ const createWorker = (name: string) => {
 };
 
 export const getWorker = (name: string) => {
-  return workers[name];
+  const worker =  workers[name];
+
+  if(!worker){
+    throw new Error(`${name} worker does not exist`)
+  }
+
+  return worker
 };
