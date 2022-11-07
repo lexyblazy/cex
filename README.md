@@ -8,7 +8,7 @@ How to run locally:
 
 Development workflow:
 
-Establish symlinks using `yarn link` [Read more here](https://classic.yarnpkg.com/lang/en/docs/cli/link/)
+Establish symlinks using `yarn link` ([Read more here](https://classic.yarnpkg.com/lang/en/docs/cli/link/)) 
 so changes to the crypto-lib package can reflect in real time in other packages
 
 in the `crypto-lib` folder, run `yarn link`, then in any other package that has the `crypto-lib` package as a dependency
