@@ -10,6 +10,8 @@ export const initWorkers = () => {
   for (const name of workerNames) {
     workers[name] = createWorker(name);
   }
+
+  console.log(`All workers are up and running`)
 };
 
 const createWorker = (name: string) => {
