@@ -30,7 +30,7 @@ export interface AddressEntity extends BaseEntity {
 
   asset: AssetEntity;
 
-  user: UserEntity;
+  user: UserEntity | null;
 }
 
 export interface AssetEntity extends BaseEntity {

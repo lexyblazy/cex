@@ -41,12 +41,14 @@ export const addressEntity = new EntitySchema<AddressEntity>({
       type: "many-to-one",
       target: "assets",
       joinColumn: true,
+      nullable: false,
     },
 
     user: {
       type: "many-to-one",
       target: "users",
       joinColumn: true,
+      nullable: true,
     },
   },
 });
