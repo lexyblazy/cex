@@ -11,7 +11,7 @@ export const initWorkers = () => {
     workers[name] = createWorker(name);
   }
 
-  console.log(`All workers are up and running`)
+  console.log(`All workers are up and running`);
 };
 
 const createWorker = (name: string) => {
@@ -25,11 +25,11 @@ const createWorker = (name: string) => {
 };
 
 export const getWorker = (name: string) => {
-  const worker =  workers[name];
+  const worker = workers[name];
 
-  if(!worker){
-    throw new Error(`${name} worker does not exist`)
+  if (!worker) {
+    throw new Error(`${name} worker does not exist`);
   }
 
-  return worker
+  return worker;
 };

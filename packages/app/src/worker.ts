@@ -8,7 +8,7 @@ import { addressWorker } from "./workers";
 /**
  * not all workers requires multiple worker processes.
  * Some workers e.g address generation requires only one worker to ensure we don't generate the same addresses multiple times
- * 
+ *
  */
 function withThrong<T>(fn: () => T, workersCount?: number) {
   return throng({

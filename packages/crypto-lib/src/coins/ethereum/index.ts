@@ -1,1 +1,1 @@
-export * from './EthereumHdWalletUtils'
+export * from "./EthereumHdWalletUtils";

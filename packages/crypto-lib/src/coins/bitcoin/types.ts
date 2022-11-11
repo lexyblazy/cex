@@ -1,2 +1,1 @@
-
-export type AddressType = 'legacy' | 'segwitNative';
+export type AddressType = "legacy" | "segwitNative";

@@ -39,8 +39,8 @@ export const addressEntity = new EntitySchema<AddressEntity>({
   relations: {
     asset: {
       type: "many-to-one",
-      target: "assets", 
-      joinColumn: true
+      target: "assets",
+      joinColumn: true,
     },
 
     user: {
