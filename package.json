@@ -11,10 +11,19 @@
     "cleandeps": "rm -rf node_modules packages/*/node_modules",
     "initialize": "yarn install && yarn bootstrap",
     "cleaninstall": "yarn cleandeps && yarn initialize",
-    "build": "bin/build.sh"
+    "build": "bin/build.sh",
+    "format:check": "yarn prettier --check .",
+    "format:write": "yarn prettier --write .",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*": "yarn build && yarn prettier --write --ignore-unknown"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
-    "lerna": "^4.0.0"
+    "husky": "^8.0.2",
+    "lerna": "^4.0.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "2.7.1"
   }
 }
