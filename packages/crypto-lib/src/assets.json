@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Bitcoin",
+    "description": "Bitcoin is a cryptocurrency. It is a decentralized digital currency that is based on cryptography. As such, it can operate without the need of a central authority like a central bank or a company. It is unlike government-issued or fiat currencies such as US Dollars or Euro in which they are controlled by the country’s central bank. The decentralized nature allows it to operate on a peer-to-peer network whereby users are able to send funds to each other without going through intermediaries.",
+    "networkSymbol": "BTC",
+    "requiredConfirmations": 6,
+    "symbol": "BTC"
+  },
+  {
+    "name": "Ethereum",
+    "description": "Ethereum is a global, open-source platform for decentralized applications. In other words, the vision is to create a world computer that anyone can build applications in a decentralized manner; while all states and data are distributed and publicly accessible. Ethereum supports smart contracts in which developers can write code in order to program digital value. Examples of decentralized apps (dapps) that are built on Ethereum includes tokens, non-fungible tokens, decentralized finance apps, lending protocol, decentralized exchanges, and much more.",
+    "networkSymbol": "ETH",
+    "requiredConfirmations": 12,
+    "symbol": "ETH"
+  }
+]
