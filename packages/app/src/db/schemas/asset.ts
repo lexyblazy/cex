@@ -3,6 +3,7 @@ import { AssetEntity } from "./types";
 
 export const assetEntity = new EntitySchema<AssetEntity>({
   name: "assets",
+
   columns: {
     id: {
       type: "uuid",
@@ -51,4 +52,12 @@ export const assetEntity = new EntitySchema<AssetEntity>({
       nullable: true,
     },
   },
+
+  indices: [
+    {
+      name: "indexUqSymbolNetworkSymbol",
+      columns: ["symbol", "networkSymbol"],
+      unique: true,
+    },
+  ],
 });
