@@ -16,7 +16,8 @@ Project structure
 run `yarn build` in crypto lib, then `yarn add file:../crypto-lib` in the project that has `crypto-lib` as a dependency. 
 
 
-Services (view the docker-compose.local-yml for more details)
+Services (view the `docker-compose.local-yml` for more details)
+
     - db (postgres database)
     - redis
     - app (the main application that serves api requests)
