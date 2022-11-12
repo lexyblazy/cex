@@ -10,6 +10,7 @@ export const initServices = async () => {
     await initTypeorm();
     initRedis();
     initWorkers();
+    // await loadAssets(); 
   } catch (error) {
     console.error("Failed to init core requirements", error);
     process.exit(1);
