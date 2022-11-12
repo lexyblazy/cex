@@ -24,8 +24,6 @@ export interface SessionEntity extends BaseEntity {
 export interface AddressEntity extends BaseEntity {
   address: string;
 
-  derivationPath: string;
-
   index: number;
 
   asset: AssetEntity;

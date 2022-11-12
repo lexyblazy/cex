@@ -26,11 +26,6 @@ export const addressEntity = new EntitySchema<AddressEntity>({
       nullable: false,
     },
 
-    derivationPath: {
-      type: String,
-      nullable: false,
-    },
-
     index: {
       type: "integer",
     },
