@@ -2,8 +2,8 @@ import { assetsList } from "@cex/crypto-lib";
 import { assetEntity, AssetEntity } from "#/db/schemas";
 
 import * as typeorm from "typeorm";
-import { initRedis } from "#/redisHelper";
-import { initWorkers } from "#/workers";
+import { init as initRedis } from "#/redisHelper";
+import { init as initWorkers } from "#/workers";
 
 export const initServices = async () => {
   try {
@@ -30,15 +30,13 @@ export const initTypeorm = async () => {
 const loadAssets = async () => {
   const typeormConnection = typeorm.getConnection();
   const assetsRepository = typeormConnection.getRepository(assetEntity);
-  const assetEntities: Partial<AssetEntity>[] = assetsList.map(
-    (a: Partial<AssetEntity>) => ({
-      description: a.description,
-      name: a.name,
-      networkSymbol: a.networkSymbol,
-      symbol: a.symbol,
-      requiredConfirmations: a.requiredConfirmations,
-    })
-  );
+  const assetEntities: Partial<AssetEntity>[] = assetsList.map((a: Partial<AssetEntity>) => ({
+    description: a.description,
+    name: a.name,
+    networkSymbol: a.networkSymbol,
+    symbol: a.symbol,
+    requiredConfirmations: a.requiredConfirmations,
+  }));
 
   await assetsRepository.save(assetEntities);
 };

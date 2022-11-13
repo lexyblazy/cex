@@ -23,16 +23,11 @@ const question = async (question: string) => {
   return await answer;
 };
 
-program
-  .name("crypto-lib")
-  .description("CLI for some crypto-lib utilities")
-  .version("0.1.0");
+program.name("crypto-lib").description("CLI for some crypto-lib utilities").version("0.1.0");
 
 program
   .command("generateExtendedKeys")
-  .description(
-    "Generate extended keys (xpub and xprv) from the mnemonic phrase"
-  )
+  .description("Generate extended keys (xpub and xprv) from the mnemonic phrase")
   .action(async () => {
     try {
       const mnemonic = (await question(
@@ -42,9 +37,7 @@ program
         chalk.red(`Enter your password (Leave blank if N/A): \n`)
       )) as string;
       const coinSymbol = (await question(
-        chalk.blue(
-          `Enter coin symbol (e.g ${constants.SUPPORTED_COINS.join()}) : \n`
-        )
+        chalk.blue(`Enter coin symbol (e.g ${constants.SUPPORTED_COINS.join()}) : \n`)
       )) as SUPPORTED_COINS;
 
       if (!constants.SUPPORTED_COINS.includes(coinSymbol)) {
