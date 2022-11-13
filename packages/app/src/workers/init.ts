@@ -1,5 +1,5 @@
 import Queue from "bull";
-import { queueCreateRedisClient } from "../redisHelper";
+import * as redisHelper from "../redisHelper";
 import { ADDRESSES_JOB_PIPELINE } from "./constants";
 
 const workers: { [key in string]: Queue.Queue } = {};
@@ -16,7 +16,7 @@ export const initWorkers = () => {
 
 const createWorker = (name: string) => {
   return new Queue(name, {
-    createClient: queueCreateRedisClient(name),
+    createClient: redisHelper.bull.queueCreateRedisClient(name),
     defaultJobOptions: {
       removeOnComplete: true,
       removeOnFail: true,

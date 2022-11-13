@@ -4,20 +4,18 @@
  * just spinning up new connections without any control
  * each bull queue/worker combination  requires 3 connections, of which two can be shared, but bclients cannot be shared
  *
- *
  */
 import Redis, { RedisOptions } from "ioredis";
+import { ADDRESSES_JOB_PIPELINE } from "../workers/constants";
 
-import { QueueOptions } from "bull";
-import * as workers from "./workers";
-
-const addBclientSuffix = (name: string) => `${name}-bclient`;
+import * as constants from "./constants";
+import { addBclientSuffix, getBullClientOptions } from "./bullHelper";
 
 const REDIS_CLIENTS_NAMES = [
   "default",
-  workers.constants.REDIS_CLIENT_NAME_BULL,
-  workers.constants.REDIS_CLIENT_NAME_BULL_SUBSCRIBER,
-  addBclientSuffix(workers.constants.ADDRESSES_JOB_PIPELINE),
+  constants.REDIS_CLIENT_NAME_BULL,
+  constants.REDIS_CLIENT_NAME_BULL_SUBSCRIBER,
+  addBclientSuffix(ADDRESSES_JOB_PIPELINE),
 ];
 
 const redisClients: { [key in string]: Redis } = {};
@@ -45,36 +43,6 @@ const createClient = (name: string) => {
 };
 
 export const getClient = (name: string = "default") => redisClients[name];
-
-export const queueCreateRedisClient =
-  (clientName: string): QueueOptions["createClient"] =>
-  (type: "client" | "subscriber" | "bclient", _redisOpts: RedisOptions) => {
-    switch (type) {
-      case "client":
-        return getClient(workers.constants.REDIS_CLIENT_NAME_BULL);
-      case "subscriber":
-        return getClient(workers.constants.REDIS_CLIENT_NAME_BULL_SUBSCRIBER);
-      case "bclient":
-        return getClient(addBclientSuffix(clientName));
-      default:
-        throw new Error(`Unexpected connection type: ${type}`);
-    }
-  };
-
-const isBullClient = (clientName: string): boolean => {
-  return clientName.includes("bclient") || clientName.includes("bull");
-};
-
-const getBullClientOptions = (clientName: string) => {
-  if (isBullClient(clientName)) {
-    return {
-      maxRetriesPerRequest: null,
-      enableReadyCheck: false,
-      keyPrefix: undefined,
-    };
-  }
-  return {};
-};
 
 export const initRedis = () => {
   for (const name of REDIS_CLIENTS_NAMES) {
