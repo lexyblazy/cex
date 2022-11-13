@@ -1,47 +1,30 @@
-// import { BitcoinHdWalletUtils, EthereumHdWalletUtils } from "@cex/crypto-lib";
+import { AddressJobPipeline, generateNewAddresses } from "#/addresses";
 import { ADDRESSES_JOB_PIPELINE, MAX_JOBS_PER_WORKER } from "./constants";
 import { getWorker } from "./init";
 
 export const start = async () => {
-  const addressWorker = getWorker(ADDRESSES_JOB_PIPELINE);
+  const addressWorker = getWorker<AddressJobPipeline>(ADDRESSES_JOB_PIPELINE);
 
-  await addressWorker.add(
+  addressWorker.add(
     {
-      luckyNumber: Math.random(),
+      action: "generateNewAddresses",
     },
-    {}
+    {
+      repeat: {
+        cron: "*/1 * * * *",
+      },
+    }
   );
 
   addressWorker.process(MAX_JOBS_PER_WORKER, (job) => {
-    const jobData = job.data;
+    const { action } = job.data;
 
-    console.log(jobData, job.id);
+    switch (action) {
+      case "generateNewAddresses":
+        return generateNewAddresses();
+      default:
+        console.log(`Unknown action=${action}`);
+        break;
+    }
   });
 };
-
-// const deriveBitcoinAddresses = async () => {
-//   const { BTC_XPUB } = process.env;
-//   if (!BTC_XPUB) {
-//     throw new Error("Environment variable BTC_XPUB is missing");
-//   }
-//   const bitcoinHdWalletUtils = new BitcoinHdWalletUtils(BTC_XPUB);
-
-//   for (let i = 0; i < 10; i++) {
-//     const address = bitcoinHdWalletUtils.deriveAddress(i, "legacy");
-//     console.log(address);
-//   }
-// };
-
-// const deriveEthereumAddresses = async () => {
-//   const { ETH_XPUB } = process.env;
-//   if (!ETH_XPUB) {
-//     throw new Error("Environment variable ETH_XPUB is missing");
-//   }
-
-//   const ethHdWalletUtils = new EthereumHdWalletUtils(ETH_XPUB);
-
-//   for (let i = 0; i < 10; i++) {
-//     const address = ethHdWalletUtils.deriveAddress(i);
-//     console.log(address);
-//   }
-// };
