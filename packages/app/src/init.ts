@@ -1,16 +1,16 @@
 import { assetsList } from "@cex/crypto-lib";
-import { assetEntity, AssetEntity } from "./db/schemas";
+import { assetEntity, AssetEntity } from "#/db/schemas";
 
 import * as typeorm from "typeorm";
-import { initRedis } from "./redisHelper";
-import { initWorkers } from "./workers";
+import { initRedis } from "#/redisHelper";
+import { initWorkers } from "#/workers";
 
 export const initServices = async () => {
   try {
     await initTypeorm();
     initRedis();
     initWorkers();
-    // await loadAssets(); 
+    // await loadAssets();
   } catch (error) {
     console.error("Failed to init core requirements", error);
     process.exit(1);
