@@ -6,10 +6,11 @@
  *
  */
 import Redis, { RedisOptions } from "ioredis";
-import { ADDRESSES_JOB_PIPELINE } from "../workers/constants";
+import { ADDRESSES_JOB_PIPELINE } from "#/workers/constants";
 
 import * as constants from "./constants";
 import { addBclientSuffix, getBullClientOptions } from "./bullHelper";
+import { init as initLocker } from "./locker";
 
 const REDIS_CLIENTS_NAMES = [
   "default",
@@ -44,9 +45,14 @@ const createClient = (name: string) => {
 
 export const getClient = (name: string = "default") => redisClients[name];
 
-export const initRedis = () => {
+const initRedis = () => {
   for (const name of REDIS_CLIENTS_NAMES) {
     const client = createClient(name);
     redisClients[name] = client;
   }
+};
+
+export const init = () => {
+  initRedis();
+  initLocker();
 };
