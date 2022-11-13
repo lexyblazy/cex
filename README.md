@@ -8,13 +8,13 @@ How to run locally:
 - Run the `yarn start:dev` command to start the services.
 
 Project structure
-  - packages/app 
-  - packages/crypto-lib 
 
-`crypto-lib` is a dependency of  `app` (and most likely other services). To ensure changes to crypto-lib are reflected across board.
+- packages/app
+- packages/crypto-lib
 
-run `yarn build` in crypto lib, then `yarn add file:../crypto-lib` in the project that has `crypto-lib` as a dependency. 
+`crypto-lib` is a dependency of `app` (and most likely other services). To ensure changes to crypto-lib are reflected across board.
 
+run `yarn build` in crypto lib, then `yarn add file:../crypto-lib` in the project that has `crypto-lib` as a dependency.
 
 Services (view the `docker-compose.local-yml` for more details)
 
