@@ -4,7 +4,7 @@ import { ADDRESSES_JOB_PIPELINE } from "./constants";
 
 const workers: { [key in string]: Queue.Queue } = {};
 
-export const initWorkers = () => {
+export const init = () => {
   const workerNames = [ADDRESSES_JOB_PIPELINE];
 
   for (const name of workerNames) {
@@ -24,8 +24,8 @@ const createWorker = (name: string) => {
   });
 };
 
-export const getWorker = (name: string) => {
-  const worker = workers[name];
+export const getWorker = <T>(name: string) => {
+  const worker = workers[name] as Queue.Queue<T>;
 
   if (!worker) {
     throw new Error(`${name} worker does not exist`);

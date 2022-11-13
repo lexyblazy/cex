@@ -19,18 +19,6 @@ const main = async (app: express.Application) => {
     });
   });
 
-  app.get("/job", async (req, res) => {
-    const queue = getWorker(ADDRESSES_JOB_PIPELINE);
-    const job = await queue.add(
-      {
-        luckyNumberFromApi: Math.random(),
-      },
-      {}
-    );
-
-    res.send(job.id);
-  });
-
   app.listen(PORT, async () => {
     console.log(`Server is up and running on ${PORT} 🚀🚀`);
   });
