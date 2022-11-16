@@ -6,4 +6,5 @@ module.exports = {
   cli: {
     migrationsDir: "src/db/migrations",
   },
+  maxQueryExecutionTime: 2000,
 };
