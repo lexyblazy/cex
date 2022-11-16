@@ -28,9 +28,6 @@ const generateNewAddressPerAsset = async (assetEntity: AssetEntity) => {
         return null;
       }
 
-      console.log("Lock expiration", Date.now() - lock.expiration);
-      console.log("Lock attempts", await lock.attempts);
-
       const typeormConnection = typeorm.getConnection();
       const addressesRepository = typeormConnection.getRepository(addressEntity);
       const freeAddressesCount = await addressesRepository.count({
@@ -71,6 +68,6 @@ const generateNewAddressPerAsset = async (assetEntity: AssetEntity) => {
         return await addressesRepository.save(addressEntities);
       }
     },
-    500
+    5000
   );
 };
