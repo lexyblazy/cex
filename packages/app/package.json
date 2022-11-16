@@ -19,6 +19,7 @@
     "@types/throng": "^5.0.4",
     "@types/uuid": "^8.3.4",
     "env-cmd": "^10.1.0",
+    "loadtest": "^5.2.0",
     "nodemon": "^2.0.20",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.0",
