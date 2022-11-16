@@ -1,9 +1,11 @@
 import { assetsList } from "@cex/crypto-lib";
-import { assetEntity, AssetEntity } from "#/db/schemas";
-
+import express from "express";
 import * as typeorm from "typeorm";
+
+import { assetEntity, AssetEntity } from "#/db/schemas";
 import { init as initRedis } from "#/redisHelper";
 import { init as initWorkers } from "#/workers";
+import { addressesRouter } from "./addresses";
 
 export const initServices = async () => {
   try {
@@ -25,6 +27,10 @@ export const initTypeorm = async () => {
   });
 
   await typeorm.createConnection(defaultConnectionOptions);
+};
+
+export const initRouters = (app: express.Application) => {
+  app.use("/address", addressesRouter.create());
 };
 
 const loadAssets = async () => {
