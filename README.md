@@ -23,24 +23,20 @@ Services (view the `docker-compose.local-yml` for more details)
     - app (the main application that serves api requests)
     - worker (a worker that handles background task and jobs, it runs the same application context as the app)
 
-
-
 The app has two entry points.
+
 1. `src/main.ts`
 2. `src/worker.ts`
 
-
 The application uses [typeorm](https://www.npmjs.com/package/typeorm/v/0.2.45) as the ORM.
 
-Ensure to run the database  migrations immediately after starting the services. 
+Ensure to run the database migrations immediately after starting the services.
 
 ```sh
 cd packages/app/
 
 yarn exec:typeorm migration:run
 ```
-
-
 
 If there are ever permission issues when running the bash scripts, use `chmod` command to grant the required privileges.
 
