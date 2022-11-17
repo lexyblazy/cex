@@ -39,19 +39,17 @@ const prefixLockResource = (lockResource: string) => `Redlock:${lockResource}`;
 const getLockResource = (lock: Lock) => lock.resources[0];
 
 export const extendLock = async (lock: Lock, lockResource: string, duration: number) => {
-  const isLockValid = isLockStillValid(lock);
-
   const isCorrectResource = getLockResource(lock) === prefixLockResource(lockResource);
 
   if (!isCorrectResource) {
     throw new Error(
-      `Lock resource mismatch!!!, ${getLockResource(lock)} is similar to ${prefixLockResource(
+      `Lock resource mismatch!!!, ${getLockResource(lock)} is NOT similar to ${prefixLockResource(
         lockResource
       )} `
     );
   }
 
-  if (isLockValid) {
+  if (isLockStillValid(lock)) {
     await lock.extend(duration);
   } else {
     throw new Error(`Lock on ${lockResource} has already expired`);
