@@ -2,7 +2,7 @@ import * as typeorm from "typeorm";
 import { Lock } from "redlock";
 
 import { addressEntity, AssetEntity, assetEntity } from "#/db/schemas";
-import { withLock } from "#/redisHelper/locker";
+import { withRedlock } from "#/redisHelper/locker";
 
 import { MINIMUM_FREE_ADDRESSES_THRESHOLD } from "../constants";
 import { createAddressEntities } from "./createAddressEntities";
@@ -20,7 +20,7 @@ export const generateNewAddresses = async () => {
 const generateNewAddressPerAsset = async (assetEntity: AssetEntity) => {
   const lockResource = `generateNewAddress:${assetEntity.networkSymbol}`;
 
-  return withLock(
+  return withRedlock(
     lockResource,
     async (lock: Lock | null) => {
       if (!lock) {

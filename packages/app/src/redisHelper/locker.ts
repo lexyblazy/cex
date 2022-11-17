@@ -16,7 +16,7 @@ const redlockSettings: RedLockSettings = {
 
 let redlockInstance: Redlock;
 
-export const withLock = async <T>(
+export const withRedlock = async <T>(
   lockResource: string,
   callback: (lock: Lock | null) => Promise<T>,
   duration = DEFAULT_LOCK_DURATION
