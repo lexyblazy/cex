@@ -5,14 +5,14 @@ import * as typeorm from "typeorm";
 import { assetEntity, AssetEntity } from "#/db/schemas";
 import { init as initRedis } from "#/redisHelper";
 import { init as initWorkers } from "#/workers";
-import { addressesRouter } from "./addresses";
+import { addressesRouter } from "#/addresses";
 
 export const initServices = async () => {
   try {
     await initTypeorm();
+    await loadAssets();
     initRedis();
     initWorkers();
-    // await loadAssets();
   } catch (error) {
     console.error("Failed to init core requirements", error);
     process.exit(1);
@@ -36,13 +36,21 @@ export const initRouters = (app: express.Application) => {
 const loadAssets = async () => {
   const typeormConnection = typeorm.getConnection();
   const assetsRepository = typeormConnection.getRepository(assetEntity);
-  const assetEntities: Partial<AssetEntity>[] = assetsList.map((a: Partial<AssetEntity>) => ({
-    description: a.description,
-    name: a.name,
-    networkSymbol: a.networkSymbol,
-    symbol: a.symbol,
-    requiredConfirmations: a.requiredConfirmations,
-  }));
 
-  await assetsRepository.save(assetEntities);
+  // refresh asset list on startup
+  const existingAssetsList = await assetsRepository.find({});
+
+  if (existingAssetsList.length === 0) {
+    const assetEntities: Partial<AssetEntity>[] = assetsList.map((a: Partial<AssetEntity>) => ({
+      description: a.description,
+      name: a.name,
+      networkSymbol: a.networkSymbol,
+      symbol: a.symbol,
+      requiredConfirmations: a.requiredConfirmations,
+    }));
+
+    return assetsRepository.save(assetEntities);
+  }
+
+  // TODO: implement a small diff algorithm, to add new assets to db, when crypto-lib assets list is updated
 };
