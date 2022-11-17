@@ -5,7 +5,7 @@ import { addressEntity, AssetEntity, assetEntity } from "#/db/schemas";
 import { withLock } from "#/redisHelper/locker";
 
 import { MINIMUM_FREE_ADDRESSES_THRESHOLD } from "../constants";
-import { createAddressEntities } from "./createAddressEntties";
+import { createAddressEntities } from "./createAddressEntities";
 
 export const generateNewAddresses = async () => {
   const typeormConnection = typeorm.getConnection();
