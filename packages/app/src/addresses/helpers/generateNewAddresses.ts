@@ -49,24 +49,22 @@ const generateNewAddressPerAsset = async (assetEntity: AssetEntity) => {
         return;
       }
 
-      if (shouldGenerateNewAddresses) {
-        const lastAddress = await addressesRepository.findOne({
-          where: {
-            asset: assetEntity,
-          },
-          order: {
-            index: "DESC",
-          },
-        });
-        const lastIndex = lastAddress?.index ?? 0;
+      const lastAddress = await addressesRepository.findOne({
+        where: {
+          asset: assetEntity,
+        },
+        order: {
+          index: "DESC",
+        },
+      });
+      const lastIndex = lastAddress?.index ?? 0;
 
-        const noOfAddressesToGenerate = lastIndex + assetFreeAddressesThreshold;
-        console.log(`Generating ${noOfAddressesToGenerate} new address...`);
+      const noOfAddressesToGenerate = lastIndex + assetFreeAddressesThreshold;
+      console.log(`Generating ${noOfAddressesToGenerate} new address...`);
 
-        const addressEntities = createAddressEntities(assetEntity, noOfAddressesToGenerate);
+      const addressEntities = createAddressEntities(assetEntity, noOfAddressesToGenerate);
 
-        return await addressesRepository.save(addressEntities);
-      }
+      return addressesRepository.save(addressEntities);
     },
     5000
   );

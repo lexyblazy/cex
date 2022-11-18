@@ -26,7 +26,8 @@ export const withRedlock = async <T>(
     const fullLockResource = prefixLockResource(lockResource);
 
     lock = await redlockInstance.acquire([fullLockResource], duration);
-    return await callback(lock);
+
+    return callback(lock);
   } finally {
     if (lock) {
       await lock.release();
