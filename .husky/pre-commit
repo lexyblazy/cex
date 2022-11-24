@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged
+yarn build || echo "Build failed"
+
+yarn format:check || echo "Prettier format check failed, run yarn format:write "
+
+

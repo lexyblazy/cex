@@ -16,9 +16,6 @@
     "format:write": "yarn prettier --write .",
     "prepare": "husky install"
   },
-  "lint-staged": {
-    "**/*": "yarn build && yarn format:check"
-  },
   "devDependencies": {
     "env-cmd": "^10.1.0",
     "husky": "^8.0.2",
