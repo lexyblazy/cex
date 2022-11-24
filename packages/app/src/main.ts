@@ -4,15 +4,20 @@ import * as typeorm from "typeorm";
 import morgan from "morgan";
 
 import { initRouters, initServices } from "#/init";
-import { isDev } from "#/utils";
+import { getCurrentCommitHash, isDev } from "#/utils";
 
 const { PORT } = process.env;
+
+const loadMiddleware = (app: express.Application) => {
+  app.use(morgan(isDev() ? "dev" : "combined"));
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
+};
 
 const main = async (app: express.Application) => {
   await initServices();
 
-  app.use(morgan(isDev() ? "dev" : "combined"));
-
+  loadMiddleware(app);
   initRouters(app);
 
   app.get("/status", async (_req, res) => {
@@ -20,6 +25,7 @@ const main = async (app: express.Application) => {
 
     res.send({
       isDatabaseConnected: connection.isConnected,
+      runningCommit: await getCurrentCommitHash(),
     });
   });
 
