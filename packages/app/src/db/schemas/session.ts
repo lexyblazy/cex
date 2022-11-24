@@ -37,4 +37,14 @@ export const sessionEntity = new EntitySchema<SessionEntity>({
       nullable: false,
     },
   },
+
+  relations: {
+    user: {
+      type: "many-to-one",
+      target: "users",
+      nullable: false,
+      joinColumn: true,
+      onDelete: 'RESTRICT'
+    },
+  },
 });

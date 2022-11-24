@@ -19,6 +19,8 @@ export interface SessionEntity extends BaseEntity {
 
   // update lastActive anytime a session is used
   lastActive: Date;
+
+  user: UserEntity;
 }
 
 export interface AddressEntity extends BaseEntity {
