@@ -1,12 +1,12 @@
 import * as typeorm from "typeorm";
 
 export const runInTransaction = <T>(
-  callback: (transaction: typeorm.EntityManager) => Promise<T>,
-  existingTransactionalEntityManager: typeorm.EntityManager
+  callback: (transactionalEntityManager: typeorm.EntityManager) => Promise<T>,
+  existingTransactionalEntityManager?: typeorm.EntityManager
 ) => {
   const typeormConnection = typeorm.getConnection();
 
-  const transactionRunner = (transaction: typeorm.EntityManager) => callback(transaction);
+  const transactionRunner = (transactionalEntityManager: typeorm.EntityManager) => callback(transactionalEntityManager);
 
   return existingTransactionalEntityManager
     ? transactionRunner(existingTransactionalEntityManager)
