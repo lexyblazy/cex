@@ -6,6 +6,7 @@ import { assetEntity, AssetEntity } from "#/db/schemas";
 import { init as initRedis } from "#/redisHelper";
 import { init as initWorkers } from "#/workers";
 import { addressesRouter } from "#/addresses";
+import { usersRouter } from "#/users";
 
 export const initServices = async () => {
   try {
@@ -31,6 +32,8 @@ export const initTypeorm = async () => {
 
 export const initRouters = (app: express.Application) => {
   app.use("/address", addressesRouter.create());
+
+  app.use("/users", usersRouter.create());
 };
 
 const loadAssets = async () => {
