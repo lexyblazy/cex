@@ -17,7 +17,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "**/*": "yarn build && yarn format:write"
+    "**/*": "yarn build && yarn format:check"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
