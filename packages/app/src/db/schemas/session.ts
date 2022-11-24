@@ -44,7 +44,7 @@ export const sessionEntity = new EntitySchema<SessionEntity>({
       target: "users",
       nullable: false,
       joinColumn: true,
-      onDelete: 'RESTRICT'
+      onDelete: "RESTRICT",
     },
   },
 });

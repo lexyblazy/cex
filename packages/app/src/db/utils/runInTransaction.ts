@@ -6,7 +6,8 @@ export const runInTransaction = <T>(
 ) => {
   const typeormConnection = typeorm.getConnection();
 
-  const transactionRunner = (transactionalEntityManager: typeorm.EntityManager) => callback(transactionalEntityManager);
+  const transactionRunner = (transactionalEntityManager: typeorm.EntityManager) =>
+    callback(transactionalEntityManager);
 
   return existingTransactionalEntityManager
     ? transactionRunner(existingTransactionalEntityManager)
