@@ -23,7 +23,7 @@ export const signup: express.RequestHandler = async (req, res) => {
   const usersRepository = typeormConnection.getRepository(userEntity);
 
   const existingUser = await usersRepository.findOne({
-    email,
+    email: email.toLowerCase(),
   });
 
   if (existingUser) {
