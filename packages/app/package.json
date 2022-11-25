@@ -27,7 +27,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@cex/crypto-lib": "file:../crypto-lib",
+    "@cex/crypto-lib": "../crypto-lib",
     "bcryptjs": "^2.4.3",
     "bull": "^4.10.1",
     "express": "^4.18.2",

@@ -14,7 +14,7 @@ Project structure
 
 `crypto-lib` is a dependency of `app` (and most likely other services). To ensure changes to crypto-lib are reflected across board.
 
-run `yarn build` in crypto lib, then `yarn add file:../crypto-lib` in the project that has `crypto-lib` as a dependency.
+run `yarn build` in crypto lib, then `yarn add file:../crypto-lib` or `yarn add ../crypto-lib` (depending on which version of yarn you're running)—— in the project that has `crypto-lib` as a dependency.
 
 Services (view the `docker-compose.local-yml` for more details)
 
