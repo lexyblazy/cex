@@ -1,6 +1,6 @@
 import { AddressJobPipeline, generateNewAddresses } from "#/addresses";
-import { ADDRESSES_JOB_PIPELINE, MAX_JOBS_PER_WORKER } from "./constants";
-import { getWorker } from "./init";
+import { ADDRESSES_JOB_PIPELINE, MAX_JOBS_PER_WORKER } from "../workers/constants";
+import { getWorker } from "../workers/init";
 
 export const start = async () => {
   const addressWorker = getWorker<AddressJobPipeline>(ADDRESSES_JOB_PIPELINE);
