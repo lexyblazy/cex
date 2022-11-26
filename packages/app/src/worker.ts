@@ -2,8 +2,10 @@
 // transaction worker
 // session worker - revalidate sessions
 import throng from "throng";
-import { initServices } from "./init";
-import { addressWorker } from "./workers";
+
+import { initServices } from "#/init";
+import { addressWorker } from "#/addresses";
+import { sessionsWorker } from "#/sessions";
 
 /**
  * not all workers requires multiple worker processes.
@@ -22,7 +24,7 @@ function withThrong<T>(fn: () => T, workersCount?: number) {
 const main = async () => {
   await initServices();
 
-  return Promise.all([addressWorker.start()]);
+  return Promise.all([addressWorker.start(), sessionsWorker.start()]);
 };
 
 main().catch(console.error);
