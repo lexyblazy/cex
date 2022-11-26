@@ -15,4 +15,6 @@ export const deleteInActiveSessions = async () => {
   await sessionsRepository.delete({
     lastActive: typeorm.LessThan(minSessionValidityTimestamp),
   });
+
+  console.log("Deleted Inactive Sessions");
 };
