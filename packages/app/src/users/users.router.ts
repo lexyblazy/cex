@@ -1,5 +1,5 @@
 import * as express from "express";
-import { login, signup } from "./handlers";
+import { checkAuth, login, logout, signup } from "./handlers";
 
 export const create = () => {
   const router = express.Router();
@@ -7,6 +7,8 @@ export const create = () => {
   router.post("/signup", signup);
 
   router.post("/login", login);
+
+  router.post("/logout", checkAuth, logout);
 
   return router;
 };
