@@ -24,6 +24,9 @@ export const checkAuth: express.RequestHandler = async (req, res, next) => {
   if (!session) {
     return res.status(HttpStatus.UNAUTHORIZED).send();
   }
+
+  await sessionsRepository.update({ id: session.id }, { lastActive: new Date() });
+
   req.session = session;
   next();
 };
