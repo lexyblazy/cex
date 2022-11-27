@@ -12,7 +12,7 @@ export const getOneWithLock = <T extends typeorm.ObjectLiteral>({
   where: typeorm.FindConditions<T>;
   relations?: string[];
   existingTransactionalEntityManager?: typeorm.EntityManager;
-  callback: (entity: T | undefined, transaction: typeorm.EntityManager) => Promise<T>;
+  callback: (entity: T | undefined, transaction: typeorm.EntityManager) => Promise<T | null>;
 }) => {
   const typeormConnection = typeorm.getConnection();
 
