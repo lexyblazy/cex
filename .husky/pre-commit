@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn build || echo "Build failed"
+set -e
 
-yarn format:check || echo "Prettier format check failed, run yarn format:write "
+yarn build || (echo "Build failed" && exit 1)
 
-
+yarn format:check || (echo "Prettier format check failed, run yarn format:write" && exit 1)
