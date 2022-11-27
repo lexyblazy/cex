@@ -18,6 +18,7 @@ export const checkAuth: express.RequestHandler = async (req, res, next) => {
     where: {
       token: authToken,
     },
+    relations: ["user"],
   });
 
   if (!session) {
