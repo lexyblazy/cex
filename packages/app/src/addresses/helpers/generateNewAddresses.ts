@@ -60,7 +60,9 @@ const generateNewAddressPerAsset = async (assetEntity: AssetEntity) => {
       const lastIndex = lastAddress?.index ?? 0;
 
       const noOfAddressesToGenerate = lastIndex + assetFreeAddressesThreshold;
-      console.log(`Generating ${noOfAddressesToGenerate} new address...`);
+      console.log(
+        `[${assetEntity.networkSymbol}]: Generating ${noOfAddressesToGenerate} new address...`
+      );
 
       const addressEntities = createAddressEntities(assetEntity, noOfAddressesToGenerate);
 
