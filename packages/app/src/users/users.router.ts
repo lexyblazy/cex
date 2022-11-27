@@ -1,5 +1,7 @@
 import * as express from "express";
-import { checkAuth, login, logout, signup } from "./handlers";
+
+import { checkAuth } from "#/sessions";
+import { login, logout, signup } from "./handlers";
 
 export const create = () => {
   const router = express.Router();
