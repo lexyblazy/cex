@@ -27,7 +27,20 @@ export const withRedlock = async <T>(
 
     lock = await redlockInstance.acquire([fullLockResource], duration);
 
-    return callback(lock);
+    const result = await callback(lock);
+
+    return result;
+  } catch (error) {
+    /**
+     * I experienced this error — ExecutionError: The operation was unable to achieve a quorum during its retry window.
+     * When I was trying to acquire a lock on the same resource concurrently,
+     * Ideally this should have been an instance of `ResourceLockedError`
+     * and should not throw an error or break control flow but for some reason it did.
+     * So I decided to catch it and return null
+      https://github.com/mike-marcacci/node-redlock/issues/168
+     */
+    console.error("Redlock Error", error);
+    return null;
   } finally {
     if (lock) {
       await lock.release();
