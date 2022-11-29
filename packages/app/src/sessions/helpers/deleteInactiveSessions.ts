@@ -6,7 +6,7 @@ import { sessionEntity } from "#/db/schemas";
 export const deleteInActiveSessions = async () => {
   const typeormConnection = typeorm.getConnection();
   const sessionsRepository = typeormConnection.getRepository(sessionEntity);
-  const MIN_SESSION_VALIDITY_HOURS = 1;
+  const MIN_SESSION_VALIDITY_HOURS = 6;
 
   const minSessionValidityTimestamp = moment(Date.now())
     .subtract(MIN_SESSION_VALIDITY_HOURS, "hours")
