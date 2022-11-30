@@ -25,7 +25,7 @@ const deriveBitcoinAddresses = (count: number, assetEntity: AssetEntity) => {
   const addressesEntities: Partial<AddressEntity>[] = [];
 
   for (let i = 0; i < count; i++) {
-    const address = bitcoinHdWalletUtils.deriveAddress(i, "legacy");
+    const address = bitcoinHdWalletUtils.deriveAddress(i, "segwitNative");
     if (!address) {
       throw new Error(`Failed to derive bitcoin address at index=${i}`);
     }
