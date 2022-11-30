@@ -20,11 +20,11 @@ export const initServices = async () => {
   }
 };
 
-export const initTypeorm = async () => {
+export const initTypeorm = async (databaseUrl?: string) => {
   const defaultConnectionOptions = await typeorm.getConnectionOptions();
 
   Object.assign(defaultConnectionOptions, {
-    url: process.env.DATABASE_URL,
+    url: databaseUrl ?? process.env.DATABASE_URL,
   });
 
   await typeorm.createConnection(defaultConnectionOptions);
