@@ -7,12 +7,16 @@ export class BitcoinHdWalletUtils extends HdWalletUtils {
   private xprv?: string;
   network?: bitcoinJS.networks.Network;
 
-  constructor(xpub: string, xprv?: string) {
+  constructor(
+    xpub: string,
+    xprv?: string,
+    networkType: "bitcoin" | "regtest" | "testnet" = "regtest"
+  ) {
     super();
     this.xpub = xpub;
     this.xprv = xprv;
 
-    this.network = bitcoinJS.networks.bitcoin;
+    this.network = bitcoinJS.networks[networkType];
   }
 
   deriveAddress(index: number, type: AddressType = "legacy") {
