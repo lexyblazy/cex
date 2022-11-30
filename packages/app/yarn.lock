@@ -42,7 +42,7 @@ __metadata:
 
 "@cex/crypto-lib@file:../crypto-lib::locator=%40cex%2Fapp%40workspace%3A.":
   version: 1.0.0
-  resolution: "@cex/crypto-lib@file:../crypto-lib#../crypto-lib::hash=1423dc&locator=%40cex%2Fapp%40workspace%3A."
+  resolution: "@cex/crypto-lib@file:../crypto-lib#../crypto-lib::hash=48bcda&locator=%40cex%2Fapp%40workspace%3A."
   dependencies:
     "@ethereumjs/util": ^8.0.2
     bignumber.js: ^9.1.0
@@ -51,7 +51,7 @@ __metadata:
     bitcoinjs-lib: ^6.0.2
     ethers: ^5.7.2
     tiny-secp256k1: ^2.2.1
-  checksum: d760db92b22ee231ed19454fc129f0f8050d12119f5725992cfdd7e411b5ea9f537b509fd73ab10469d8c446a3c73a540e0a05a5b035ca109c1cbe200af79244
+  checksum: b6bc337bbc0e520f40a1a537fe73e3fa9701ce956e8bcad2ffc919e06a2a031da92437dd10a0e1ea3a90461118502e5a12c64b1c34fd766cfa37841c42360763
   languageName: node
   linkType: hard
 
