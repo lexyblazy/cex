@@ -1,10 +1,10 @@
-### A centralized crypto currency exchange
+# A centralized crypto currency exchange
 
 This project uses lerna
 
 How to run locally:
 
-- Clone the repo and run the `yarn initialize`
+- Clone the repo and run the `yarn install`, then run `yarn bootstrap`
 - Run the `yarn start:dev` command to start the services.
 
 Project structure
@@ -46,3 +46,21 @@ chmod +x the_file_name
 ```
 
 Thanks [AskUbuntu](https://askubuntu.com/questions/409025/permission-denied-when-running-sh-scripts) 🚀🚀
+
+## Running Blockchain nodes locally and funding accounts
+
+### Ethereum
+
+Download [ganache](https://trufflesuite.com/ganache/) and setup a workspace.
+You can generate and fund accounts(addresses) from the GUI tool.
+
+### Bitcoin (Regtest)
+
+Navigate to [Nigiri Bitcoin](https://nigiri.vulpem.com/) and download it.
+You can find more info about Nigiri on their [github page](https://github.com/vulpemventures/nigiri)
+
+Note, You should the use mnemonic provided by ganache to generate the BTC and ETH extended keys.
+
+The worker service should have generated and saved a couple of addresses to the database.
+
+In the `packages/app` folder, run the `yarn fund:btc:addresses` command to add funds to the btc addresses.
