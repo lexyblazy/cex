@@ -3,28 +3,32 @@ import HttpStatus from "http-status-codes";
 import _ from "lodash";
 import * as typeorm from "typeorm";
 
-import { AddressEntity, addressEntity, assetEntity } from "#/db/schemas";
+import { AddressEntity, addressEntity, AssetEntity, assetEntity } from "#/db/schemas";
 import { getOneWithLock } from "#/db/utils";
 import { isValidUUid } from "#/utils";
 import { withRedlock } from "#/redisHelper/locker";
 
 export const getDepositAddress: express.RequestHandler = async (req, res) => {
-  const { assetId } = req.params;
-
-  if (!isValidUUid(assetId)) {
-    return res.status(HttpStatus.BAD_REQUEST).send({ error: "Invalid asset" });
-  }
-
+  const { assetIdOrSymbol } = req.params;
   const user = req.session?.user!;
 
   const typeormConnection = typeorm.getConnection();
   const assetsRepository = typeormConnection.getRepository(assetEntity);
   const addressRepository = typeormConnection.getRepository(addressEntity);
 
-  const asset = await assetsRepository.findOne({ id: assetId });
+  const whereOptions: typeorm.FindConditions<AssetEntity> = {};
+
+  if (isValidUUid(assetIdOrSymbol)) {
+    whereOptions.id = assetIdOrSymbol;
+  } else {
+    whereOptions.symbol = assetIdOrSymbol;
+  }
+
+  const asset = await assetsRepository.findOne({ where: whereOptions });
 
   if (!asset) {
-    console.log(`AssetId = ${assetId} does not exist`);
+    console.log(`AssetIdOrSymbol = ${assetIdOrSymbol} does not exist`);
+
     return res.status(HttpStatus.BAD_REQUEST).send({ error: "Invalid asset" });
   }
 

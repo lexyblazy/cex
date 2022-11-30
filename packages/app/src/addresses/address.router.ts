@@ -7,7 +7,7 @@ import { getDepositAddress } from "./handlers";
 export const create = () => {
   const router = express.Router();
 
-  router.get("/deposit/:assetId", checkAuth, getDepositAddress);
+  router.get("/deposit/:assetIdOrSymbol", checkAuth, getDepositAddress);
 
   return router;
 };
