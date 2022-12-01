@@ -57,10 +57,9 @@ You can generate and fund accounts(addresses) from the GUI tool.
 ### Bitcoin (Regtest)
 
 Navigate to [Nigiri Bitcoin](https://nigiri.vulpem.com/) and download it.
-You can find more info about Nigiri on their [github page](https://github.com/vulpemventures/nigiri)
+You can find more info about running the Nigiri toolbox on their [github page](https://github.com/vulpemventures/nigiri)
 
-Note, You should the use mnemonic provided by ganache to generate the BTC and ETH extended keys.
 
-The worker service should have generated and saved a couple of addresses to the database.
+*Note: The worker service should have generated and saved a couple of addresses to the database. If this isn't the case, you need to ensure that the worker service is running.*
 
 In the `packages/app` folder, run the `yarn fund:btc:addresses` command to add funds to the btc addresses.
