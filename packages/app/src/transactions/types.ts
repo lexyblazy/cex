@@ -3,4 +3,14 @@ interface CreateTransaction {
   payload?: {};
 }
 
-export type TransactionsJobPipeline = CreateTransaction;
+interface SignTransaction {
+  action: "signTransaction";
+  payload?: {};
+}
+
+interface BroadcastTransaction {
+  action: "broadcastTransaction";
+  payload?: {};
+}
+
+export type TransactionsJobPipeline = CreateTransaction | SignTransaction | BroadcastTransaction;
