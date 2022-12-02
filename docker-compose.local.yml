@@ -48,6 +48,20 @@ services:
       - redis
     env_file:
       - ./env/local.env
+  signer:
+    build:
+      context: ./packages/app
+      dockerfile: Dockerfile
+    image: cex-app:latest
+    container_name: "cex_signer"
+    command: 'bash -c "cd ./packages/signer && npm run watch:dev"'
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - ./env/local.env
 
 volumes:
   redis_volume:
