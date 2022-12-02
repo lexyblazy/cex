@@ -11,17 +11,18 @@ Project structure
 
 - packages/app
 - packages/crypto-lib
+- packages/db-lib
 
-`crypto-lib` is a dependency of `app` (and most likely other services). To ensure changes to crypto-lib are reflected across board.
+`*-lib`(e.g crypto-lib, db-lib) is a dependency of `app` (and most likely other services). To ensure changes to `*-lib` are reflected across board. e.g `crypto-lib`
 
-run `yarn build` in crypto lib, then `yarn add file:../crypto-lib` or `yarn add ../crypto-lib` (depending on which version of yarn you're running)—— in the project that has `crypto-lib` as a dependency.
+run `yarn build` in `crypto-lib` , then `yarn add file:../crypto-lib` or `yarn add ../crypto-lib` (depending on which version of yarn you're running)—— in the project that has `crypto-lib` as a dependency.
 
 Services (view the `docker-compose.local-yml` for more details)
 
     - db (postgres database)
     - redis
     - app (the main application that serves api requests)
-    - worker (a worker that handles background task and jobs, it runs the same application context as the app)
+    - worker (a worker that handles background task and jobs, it runs the same docker image as the app)
 
 The app has two entry points.
 
@@ -59,7 +60,6 @@ You can generate and fund accounts(addresses) from the GUI tool.
 Navigate to [Nigiri Bitcoin](https://nigiri.vulpem.com/) and download it.
 You can find more info about running the Nigiri toolbox on their [github page](https://github.com/vulpemventures/nigiri)
 
-
-*Note: The worker service should have generated and saved a couple of addresses to the database. If this isn't the case, you need to ensure that the worker service is running.*
+_Note: The worker service should have generated and saved a couple of addresses to the database. If this isn't the case, you need to ensure that the worker service is running._
 
 In the `packages/app` folder, run the `yarn fund:btc:addresses` command to add funds to the btc addresses.
