@@ -2,4 +2,4 @@ interface DeleteInactiveSessions {
   action: "deleteInActiveSessions";
 }
 
-type SessionsJobPipeline = DeleteInactiveSessions;
+export type SessionsJobPipeline = DeleteInactiveSessions;

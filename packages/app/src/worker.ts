@@ -6,6 +6,7 @@ import throng from "throng";
 import { initServices } from "#/init";
 import { addressWorker } from "#/addresses";
 import { sessionsWorker } from "#/sessions";
+import { transactionWorker } from "#/transactions";
 
 /**
  * not all workers requires multiple worker processes.
@@ -24,7 +25,9 @@ function withThrong<T>(fn: () => T, workersCount?: number) {
 const main = async () => {
   await initServices();
 
-  return Promise.all([addressWorker.start(), sessionsWorker.start()]);
+  const promises = [addressWorker.start(), sessionsWorker.start(), transactionWorker.start()];
+
+  return Promise.all(promises);
 };
 
 main().catch(console.error);

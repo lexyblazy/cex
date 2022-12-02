@@ -6,7 +6,11 @@
  *
  */
 import Redis, { RedisOptions } from "ioredis";
-import { ADDRESSES_JOB_PIPELINE, SESSIONS_JOB_PIPELINE } from "#/workers/constants";
+import {
+  ADDRESSES_JOB_PIPELINE,
+  SESSIONS_JOB_PIPELINE,
+  TRANSACTIONS_JOB_PIPELINE,
+} from "#/workers/constants";
 
 import * as constants from "./constants";
 import { addBclientSuffix, getBullClientOptions } from "./bullHelper";
@@ -18,6 +22,7 @@ const REDIS_CLIENTS_NAMES = [
   constants.REDIS_CLIENT_NAME_BULL_SUBSCRIBER,
   addBclientSuffix(ADDRESSES_JOB_PIPELINE),
   addBclientSuffix(SESSIONS_JOB_PIPELINE),
+  addBclientSuffix(TRANSACTIONS_JOB_PIPELINE),
 ];
 
 const redisClients: { [key in string]: Redis } = {};

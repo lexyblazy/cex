@@ -6,6 +6,7 @@ import * as typeorm from "typeorm";
 import { init as initRedis } from "#/redisHelper";
 import { init as initWorkers } from "#/workers";
 import { addressesRouter } from "#/addresses";
+import { transactionRouter } from "#/transactions";
 import { usersRouter } from "#/users";
 
 export const initServices = async () => {
@@ -34,6 +35,8 @@ export const initRouters = (app: express.Application) => {
   app.use("/address", addressesRouter.create());
 
   app.use("/users", usersRouter.create());
+
+  app.use("/transactions", transactionRouter.create());
 };
 
 const loadAssets = async () => {

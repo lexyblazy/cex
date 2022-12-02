@@ -1,5 +1,6 @@
 import { getWorker, constants } from "#/workers";
 import { deleteInActiveSessions } from "./helpers";
+import { SessionsJobPipeline } from "./types";
 
 export const start = () => {
   const sessionWorker = getWorker<SessionsJobPipeline>(constants.SESSIONS_JOB_PIPELINE);
