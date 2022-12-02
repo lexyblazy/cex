@@ -17,12 +17,18 @@ import { addBclientSuffix, getBullClientOptions } from "./bullHelper";
 import { init as initLocker } from "./locker";
 
 const REDIS_CLIENTS_NAMES = [
-  "default",
+  "default", // default redis client
+
+  // bull clients
   constants.REDIS_CLIENT_NAME_BULL,
   constants.REDIS_CLIENT_NAME_BULL_SUBSCRIBER,
   addBclientSuffix(ADDRESSES_JOB_PIPELINE),
   addBclientSuffix(SESSIONS_JOB_PIPELINE),
   addBclientSuffix(TRANSACTIONS_JOB_PIPELINE),
+
+  // redis client for app-> signer pub/sub
+  constants.REDIS_CLIENT_NAME_SIGNER_PUBLISHER,
+  constants.REDIS_CLIENT_NAME_SIGNER_SUBSCRIBER,
 ];
 
 const redisClients: { [key in string]: Redis } = {};
