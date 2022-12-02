@@ -1,15 +1,16 @@
+import { schemas } from "@cex/db-lib";
 import axios from "axios";
 import BigNumber from "bignumber.js";
 import * as typeorm from "typeorm";
-import { addressEntity, assetEntity } from "#/db/schemas";
+
 import { initTypeorm } from "#/init";
 
 const main = async () => {
   await initTypeorm(process.env.DATABASE_URL_HOST);
 
   const typeormConnection = typeorm.getConnection();
-  const addressesRepository = typeormConnection.getRepository(addressEntity);
-  const assetsRepository = typeormConnection.getRepository(assetEntity);
+  const addressesRepository = typeormConnection.getRepository(schemas.addressEntity);
+  const assetsRepository = typeormConnection.getRepository(schemas.assetEntity);
 
   const btcAsset = await assetsRepository.findOne({
     where: { networkSymbol: "BTC", symbol: "BTC" },

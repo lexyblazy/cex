@@ -10,6 +10,7 @@ __metadata:
   resolution: "@cex/app@workspace:."
   dependencies:
     "@cex/crypto-lib": ../crypto-lib
+    "@cex/db-lib": ../db-lib
     "@types/bcryptjs": ^2.4.2
     "@types/express": ^4.17.14
     "@types/lodash": ^4.14.189
@@ -54,6 +55,16 @@ __metadata:
     ethers: ^5.7.2
     tiny-secp256k1: ^2.2.1
   checksum: 421b0d34edf03763b65bd32d1ff0fd63f8b2dedfe5721563ef43571c9daef12acac1e7d2287dbda6be0a9dc2c30b76a5e39342fa2cfdfe4246b86628c96b7d19
+  languageName: node
+  linkType: hard
+
+"@cex/db-lib@file:../db-lib::locator=%40cex%2Fapp%40workspace%3A.":
+  version: 1.0.0
+  resolution: "@cex/db-lib@file:../db-lib#../db-lib::hash=8d5389&locator=%40cex%2Fapp%40workspace%3A."
+  dependencies:
+    lodash: ^4.17.21
+    typeorm: 0.2.45
+  checksum: 8c88cbfe08cd72fcc2d0864ffb7f20cbe70ff91c8cb5b27665b2aec085a691d42aa6666877c9b17d43df873ed2633f72f40f84c1eb4ae0b2181d6a657587f5fb
   languageName: node
   linkType: hard
 

@@ -1,7 +1,7 @@
-import { AssetEntity } from "#/db/schemas";
+import { schemas } from "@cex/db-lib";
 
 export const MINIMUM_FREE_ADDRESSES_THRESHOLD: {
-  [key in AssetEntity["networkSymbol"]]: number;
+  [key in schemas.AssetEntity["networkSymbol"]]: number;
 } = {
   BTC: 30,
   ETH: 30,

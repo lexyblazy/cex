@@ -1,10 +1,9 @@
+import { schemas, utils as dbUtils } from "@cex/db-lib";
 import * as express from "express";
 import HttpStatus from "http-status-codes";
 import _ from "lodash";
 import * as typeorm from "typeorm";
 
-import { AddressEntity, addressEntity, AssetEntity, assetEntity } from "#/db/schemas";
-import { getOneWithLock } from "#/db/utils";
 import { isValidUUid } from "#/utils";
 import { withRedlock } from "#/redisHelper/locker";
 
@@ -13,10 +12,10 @@ export const getDepositAddress: express.RequestHandler = async (req, res) => {
   const user = req.session?.user!;
 
   const typeormConnection = typeorm.getConnection();
-  const assetsRepository = typeormConnection.getRepository(assetEntity);
-  const addressRepository = typeormConnection.getRepository(addressEntity);
+  const assetsRepository = typeormConnection.getRepository(schemas.assetEntity);
+  const addressRepository = typeormConnection.getRepository(schemas.addressEntity);
 
-  const whereOptions: typeorm.FindConditions<AssetEntity> = {};
+  const whereOptions: typeorm.FindConditions<schemas.AssetEntity> = {};
 
   if (isValidUUid(assetIdOrSymbol)) {
     whereOptions.id = assetIdOrSymbol;
@@ -75,7 +74,7 @@ export const getDepositAddress: express.RequestHandler = async (req, res) => {
       return null;
     }
 
-    const dbLockResult = await getOneWithLock<AddressEntity>({
+    const dbLockResult = await dbUtils.getOneWithLock<schemas.AddressEntity>({
       repository: addressRepository,
       where: {
         id: freeAddress.id,
@@ -87,8 +86,9 @@ export const getDepositAddress: express.RequestHandler = async (req, res) => {
           return null;
         }
 
-        const transactionalAddressRepository =
-          transactionalEntityManager.getRepository(addressEntity);
+        const transactionalAddressRepository = transactionalEntityManager.getRepository(
+          schemas.addressEntity
+        );
 
         addressEntityLocked.user = user;
 

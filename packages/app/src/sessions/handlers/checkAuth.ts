@@ -1,8 +1,7 @@
+import { schemas } from "@cex/db-lib";
 import * as express from "express";
 import HttpStatus from "http-status-codes";
 import * as typeorm from "typeorm";
-
-import { sessionEntity } from "#/db/schemas";
 
 export const checkAuth: express.RequestHandler = async (req, res, next) => {
   const authToken = req.headers.authorization;
@@ -12,7 +11,7 @@ export const checkAuth: express.RequestHandler = async (req, res, next) => {
   }
 
   const typeormConnection = typeorm.getConnection();
-  const sessionsRepository = typeormConnection.getRepository(sessionEntity);
+  const sessionsRepository = typeormConnection.getRepository(schemas.sessionEntity);
 
   const session = await sessionsRepository.findOne({
     where: {

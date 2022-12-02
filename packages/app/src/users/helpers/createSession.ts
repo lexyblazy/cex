@@ -1,14 +1,13 @@
+import { schemas } from "@cex/db-lib";
 import * as typeorm from "typeorm";
 import * as uuid from "uuid";
 
-import { sessionEntity, UserEntity } from "#/db/schemas";
-
 export const createSession = async (
-  user: UserEntity,
+  user: schemas.UserEntity,
   transactionalEntityManger?: typeorm.EntityManager
 ) => {
   const typeormConnection = transactionalEntityManger ?? typeorm.getConnection();
-  const sessionsRepository = typeormConnection.getRepository(sessionEntity);
+  const sessionsRepository = typeormConnection.getRepository(schemas.sessionEntity);
 
   return sessionsRepository.save({
     user,

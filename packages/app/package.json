@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@cex/crypto-lib": "../crypto-lib",
+    "@cex/db-lib": "../db-lib",
     "axios": "^1.2.0",
     "bcryptjs": "^2.4.3",
     "bignumber.js": "^9.1.0",

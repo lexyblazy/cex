@@ -1,7 +1,7 @@
+import { schemas } from "@cex/db-lib";
 import * as typeorm from "typeorm";
 import { Lock } from "redlock";
 
-import { addressEntity, AssetEntity, assetEntity } from "#/db/schemas";
 import { withRedlock } from "#/redisHelper/locker";
 
 import { MINIMUM_FREE_ADDRESSES_THRESHOLD } from "../constants";
@@ -9,7 +9,7 @@ import { createAddressEntities } from "./createAddressEntities";
 
 export const generateNewAddresses = async () => {
   const typeormConnection = typeorm.getConnection();
-  const assetsRepository = typeormConnection.getRepository(assetEntity);
+  const assetsRepository = typeormConnection.getRepository(schemas.assetEntity);
   const assets = await assetsRepository.find({});
 
   const promises = assets.map((asset) => generateNewAddressPerAsset(asset));
@@ -17,7 +17,7 @@ export const generateNewAddresses = async () => {
   await Promise.all(promises);
 };
 
-const generateNewAddressPerAsset = async (assetEntity: AssetEntity) => {
+const generateNewAddressPerAsset = async (assetEntity: schemas.AssetEntity) => {
   const lockResource = `generateNewAddress:${assetEntity.networkSymbol}`;
 
   return withRedlock(
@@ -29,7 +29,7 @@ const generateNewAddressPerAsset = async (assetEntity: AssetEntity) => {
       }
 
       const typeormConnection = typeorm.getConnection();
-      const addressesRepository = typeormConnection.getRepository(addressEntity);
+      const addressesRepository = typeormConnection.getRepository(schemas.addressEntity);
       const freeAddressesCount = await addressesRepository.count({
         where: {
           user: typeorm.IsNull(),

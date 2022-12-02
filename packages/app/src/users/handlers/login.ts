@@ -1,16 +1,15 @@
+import { schemas } from "@cex/db-lib";
 import bcrypt from "bcryptjs";
 import express from "express";
 import HttpStatus from "http-status-codes";
 import * as typeorm from "typeorm";
-
-import { userEntity } from "#/db/schemas";
 
 import { UserLoginParams } from "./types";
 import { createSession } from "../helpers";
 
 export const login: express.RequestHandler = async (req, res) => {
   const typeormConnection = typeorm.getConnection();
-  const usersRepository = typeormConnection.getRepository(userEntity);
+  const usersRepository = typeormConnection.getRepository(schemas.userEntity);
 
   const { email, password }: UserLoginParams = req.body;
 
