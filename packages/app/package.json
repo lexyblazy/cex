@@ -10,7 +10,6 @@
     "watch:dev": "yarn nodemon --config nodemon.json",
     "watch:worker": "yarn nodemon --config nodemon.worker.json",
     "start:prod": "yarn build && node dist/main.js",
-    "exec:typeorm": "./bin/typeorm.sh",
     "fund:btc:addresses": "./bin/run-script.sh src/scripts/fundBitcoinAddresses.ts"
   },
   "devDependencies": {
