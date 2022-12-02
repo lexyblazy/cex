@@ -45,7 +45,7 @@ __metadata:
 
 "@cex/crypto-lib@file:../crypto-lib::locator=%40cex%2Fapp%40workspace%3A.":
   version: 1.0.0
-  resolution: "@cex/crypto-lib@file:../crypto-lib#../crypto-lib::hash=7da6ba&locator=%40cex%2Fapp%40workspace%3A."
+  resolution: "@cex/crypto-lib@file:../crypto-lib#../crypto-lib::hash=a491dd&locator=%40cex%2Fapp%40workspace%3A."
   dependencies:
     "@ethereumjs/util": ^8.0.2
     bignumber.js: ^9.1.0
@@ -54,18 +54,18 @@ __metadata:
     bitcoinjs-lib: ^6.0.2
     ethers: ^5.7.2
     tiny-secp256k1: ^2.2.1
-  checksum: a4f0b967ffbf59916dc4ea21ff4895f08533e555f2179197d8b84699e4e99c6705f67e572288be346242c81b80568d31e09952915f423e97c2f19af67e8ad36f
+  checksum: 602cee79f8154fca8b6df374e447e1c1010784c1b86f1ce4710fe2d3e08c1fd106f881b90db39b8a1f39bf978b0163dedc8e09069bc8c1ae0e6696a3230a6419
   languageName: node
   linkType: hard
 
 "@cex/db-lib@file:../db-lib::locator=%40cex%2Fapp%40workspace%3A.":
   version: 1.0.0
-  resolution: "@cex/db-lib@file:../db-lib#../db-lib::hash=a7fdff&locator=%40cex%2Fapp%40workspace%3A."
+  resolution: "@cex/db-lib@file:../db-lib#../db-lib::hash=f30680&locator=%40cex%2Fapp%40workspace%3A."
   dependencies:
     lodash: ^4.17.21
     pg: ^8.8.0
     typeorm: 0.2.45
-  checksum: bc1094ce6cfbd175105d033ac63dff4b50a639bf1b946c81c5732b20e07adc1763b1a8d308b1717b58aabda18f734ed5150a5f1972a3a79fa0104e95b5109924
+  checksum: ffc26a5b11dbc753b0cc52412ec91cdf97d3ff9e96ac5f55deb5c842a79efd9f0d1618882b232f4429b7b923e86043890b6fae949669209ba6e6c8ae008d5a58
   languageName: node
   linkType: hard
 
