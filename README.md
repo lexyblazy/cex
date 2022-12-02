@@ -12,6 +12,7 @@ Project structure
 - packages/app
 - packages/crypto-lib
 - packages/db-lib
+- packages/signer
 
 `*-lib`(e.g crypto-lib, db-lib) is a dependency of `app` (and most likely other services). To ensure changes to `*-lib` are reflected across board. e.g `crypto-lib`
 
@@ -22,7 +23,8 @@ Services (view the `docker-compose.local-yml` for more details)
     - db (postgres database)
     - redis
     - app (the main application that serves api requests)
-    - worker (a worker that handles background task and jobs, it runs the same docker image as the app)
+    - worker (a worker that handles background task and jobs, it runs the same code as the app)
+    - signer (a service for signing transactions)
 
 The app has two entry points.
 
