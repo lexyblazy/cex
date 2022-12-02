@@ -34,7 +34,7 @@ The application uses [typeorm](https://www.npmjs.com/package/typeorm/v/0.2.45) a
 Ensure to run the database migrations immediately after starting the services.
 
 ```sh
-cd packages/app/
+cd packages/db-lib/
 
 yarn exec:typeorm migration:run
 ```
