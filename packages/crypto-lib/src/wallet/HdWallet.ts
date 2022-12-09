@@ -17,15 +17,23 @@ export class HdWallet extends HdWalletUtils {
     return this.bip32.fromSeed(seed);
   }
 
-  getXpub(derivationPath: string) {
+  getXpub(derivationPath?: string) {
     const root = this.getRootNode();
 
-    return root.derivePath(derivationPath).neutered().toBase58();
+    if (derivationPath) {
+      return root.derivePath(derivationPath).neutered().toBase58();
+    }
+
+    return root.neutered().toBase58();
   }
 
-  getXprv(derivationPath: string) {
+  getXprv(derivationPath?: string) {
     const root = this.getRootNode();
 
-    return root.derivePath(derivationPath).toBase58();
+    if (derivationPath) {
+      return root.derivePath(derivationPath).toBase58();
+    }
+
+    return root.toBase58();
   }
 }

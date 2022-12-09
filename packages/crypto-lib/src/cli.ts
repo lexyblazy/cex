@@ -37,12 +37,10 @@ program
         chalk.red(`Enter your password (Leave blank if N/A): \n`)
       )) as string;
       const coinSymbol = (await question(
-        chalk.blue(`Enter coin symbol (e.g ${constants.SUPPORTED_COINS.join()}) : \n`)
+        chalk.blue(
+          `Enter coin symbol (e.g ${constants.SUPPORTED_COINS.join()}, Leave blank for root extended keys) : \n`
+        )
       )) as SUPPORTED_COINS;
-
-      if (!constants.SUPPORTED_COINS.includes(coinSymbol)) {
-        throw new Error(`Unsupported coin ${coinSymbol}`);
-      }
 
       const hdWallet = new HdWallet(mnemonic, password ? password : undefined);
 
